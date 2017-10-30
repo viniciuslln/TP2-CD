@@ -18,7 +18,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Classe Runnable responsável pela comunidação dos outros nodo a instancia local
+ * As mensagens de requisição são repassadas a classe CR resposável pela sincronização
  * @author vinic
  */
 public class Cliente implements Runnable {
@@ -54,17 +55,24 @@ public class Cliente implements Runnable {
 
                 String mensagem;
                 while ((mensagem = reader.readLine()) != null) {
-                    
+                    // A primeira mensagem recebida é o envio do id do nodo
+                    // se o parse falhar é porque a mensagem não é id
+                    // passar para proxima fase
                     try{
+                        // Realisa o parse da string do bufferedreader para int
                         int parseInt = Integer.parseInt(mensagem);
                         me.id = parseInt;
                         System.out.println("Conectado ao parceiro: " + me.id);
+                        // Envia o id deste nodo para o server
                         pw.println(EstadoDaRede.getINSTANCE().getCaro().getMe().id);
                         continue;
                     }
                     catch( Exception e){
                         
                     }
+                    
+                    // Divide a mensagem recebida
+                    // Formato: "mensagem:id:relogio"
                     System.out.println("Parceiro " + me.id + ": " + mensagem);
                     String text[] = mensagem.split(":");
 
