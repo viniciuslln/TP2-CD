@@ -15,7 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Classe Runnable responsável por realizar a conexão quando esta instância é servidor
+ * Realiza a troca de ids e armazena o nodo na fila de hosts
  * @author vinic
  */
 public class Servidor implements Runnable {
@@ -36,12 +37,14 @@ public class Servidor implements Runnable {
     @Override
     public void run() {
         try {
+            //Envia id para outro nodo
             pw.println(id);
 
             String mensagem;
             while ((mensagem = reader.readLine()) != null) {
 
                 try {
+                    //Recebe id do nodo conectado e o armazena na lista de hosts
                     int parseInt = Integer.parseInt(mensagem);
                     Host h = new Host(server);
                     h.id = parseInt;
