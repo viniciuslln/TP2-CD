@@ -16,7 +16,8 @@ import java.util.concurrent.SynchronousQueue;
  * @author vinic
  */
 public class EstadoDaRede {
-
+int conectados =0;
+int conectei = 0;
     private List<Host> hosts;
     private List<Socket> servidores;
     // Queue<Host> filaHosts;
@@ -67,6 +68,22 @@ public class EstadoDaRede {
 
     public void setServidores(List<Socket> servidores) {
         this.servidores = servidores;
+    }
+
+    public int getConectados() {
+        return conectados;
+    }
+
+    public void setConectados(int conectados) {
+        this.conectados = conectados;
+    }
+
+    public int getConectei() {
+        return conectei;
+    }
+
+    public void setConectei(int conectei) {
+        this.conectei = conectei;
     }
     
     

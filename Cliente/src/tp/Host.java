@@ -17,7 +17,7 @@ public class Host {
     Socket soc;
     PrintWriter pw;
     int id;
-    boolean naSC = false;
+    boolean respondeu = false;
     
     public Host(int id){
         this.id = id;        
@@ -44,12 +44,12 @@ public class Host {
         this.id = id;
     }
 
-    public boolean isNaSC() {
-        return naSC;
+    public boolean isRespondeu() {
+        return respondeu;
     }
 
-    public void setNaSC(boolean naSC) {
-        this.naSC = naSC;
+    public void setRespondeu(boolean naSC) {
+        this.respondeu = naSC;
     }
 
     public PrintWriter getPw() {

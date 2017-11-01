@@ -11,6 +11,7 @@ package tp;
  */
 public class Requisicao {
     String req;
+    String motivo;
     int id;
     int k;
     
@@ -22,6 +23,9 @@ public class Requisicao {
         this.req = req[0];
         this.k = Integer.parseInt(req[1]);
         this.id = Integer.parseInt(req[2]);
+        if(req.length > 3){
+            this.motivo = req[3];
+        }
     }
 
     public Requisicao(String req, int id, int k) {
@@ -30,6 +34,14 @@ public class Requisicao {
         this.k = k;
     }
 
+    public Requisicao(String req, String motivo, int id, int k) {
+        this.req = req;
+        this.motivo = motivo;
+        this.id = id;
+        this.k = k;
+    }
+
+    
     public String getReq() {
         return req;
     }
@@ -52,6 +64,14 @@ public class Requisicao {
 
     public void setK(int k) {
         this.k = k;
+    }
+
+    public String getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
     }
     
     

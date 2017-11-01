@@ -24,7 +24,10 @@ public class ConexaoMeCliente implements Runnable {
         servers.add( new Tuple<>("localhost", 7770));
         servers.add( new Tuple<>("localhost", 7771));
         servers.add( new Tuple<>("localhost", 7772));
-        //servers.add( new Tuple<>("localhost", 7773));
+        servers.add( new Tuple<>("localhost", 7773));
+        servers.add( new Tuple<>("localhost", 7774));
+        servers.add( new Tuple<>("localhost", 7775));
+        servers.add( new Tuple<>("localhost", 7776));
         this.id = id;
         this.port = port;
     }
@@ -43,6 +46,7 @@ public class ConexaoMeCliente implements Runnable {
                     Socket s = new Socket(key, value);
                     System.out.println("Conectado a: " + key + ":"+value);
                     ok = true;
+                    EstadoDaRede.getINSTANCE().setConectei(EstadoDaRede.getINSTANCE().getConectei() +1);
                     new Thread(new Servidor(s, id)).start();
                 } catch (Exception e) {
                     //System.out.println("Tentar novamente a: "+ key + ":"+value);

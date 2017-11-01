@@ -30,12 +30,17 @@ public class TP2SYNC {
             new Thread(new ConexaoMeCliente(id, port)).start();
             new Thread(new ConexaoMeServidor(port)).start();
             
+            
+            while(EstadoDaRede.getINSTANCE().getConectados() != 6 && EstadoDaRede.getINSTANCE().getConectei() != 6){
+                Thread.sleep(1000);
+            }
+            
             while (true) {
 
                 if (gerarCondicao()) {
-                    Socket impressora = new Socket("localhost", 6969);
                     System.out.println(">>>Tentar Entrar na SC");
                     EstadoDaRede.getINSTANCE().getCaro().entrarSC();
+                    Socket impressora = new Socket("localhost", 6969);
                     System.out.println("===Enviar msg para impressao");
                     (new PrintWriter(impressora.getOutputStream(),true)).println("Server >>>"+id+"<<<<");
                     System.out.println("<<<Sair da SC");
@@ -48,8 +53,14 @@ public class TP2SYNC {
     }
 
     public static boolean gerarCondicao() throws InterruptedException {
-        Thread.sleep(3000);
-        return true;
+        //Thread.sleep(3000);
+        double r = Math.random();
+        return r > 0.5;
+        //, cada nodo deve sortear um valor pseudoaleatório no intervalo [0,1]. 
+        //Caso o valor seja menor ou igual a 0.5 o nodo decidirá por não acessar o recurso compartilhado,
+        //caso o valor seja superior a 0.5 o nodo irá solicitar acesso ao recurso compartilhado. 
+        
+        //return true;
     }
 
 }

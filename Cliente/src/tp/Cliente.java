@@ -73,7 +73,7 @@ public class Cliente implements Runnable {
                             EstadoDaRede.getINSTANCE().getCaro().receberRequisicao(new Requisicao(text));
                             break;
                         case "Reply":
-                            EstadoDaRede.getINSTANCE().getCaro().tratarReply(Integer.parseInt(text[2]));
+                            EstadoDaRede.getINSTANCE().getCaro().tratarReply(new Requisicao(text));
                             break;
                     }
 

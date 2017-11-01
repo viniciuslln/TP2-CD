@@ -37,6 +37,7 @@ public class ConexaoMeServidor implements Runnable {
         while (true) {
             try {
                 final Socket parceiro = serv.accept();
+                EstadoDaRede.getINSTANCE().setConectados(EstadoDaRede.getINSTANCE().getConectados());
                 Host h = new Host(parceiro);
                 //EstadoDaRede.getINSTANCE().getHosts().add( h );
                 System.out.println("Conectado a: " + parceiro.getInetAddress().getHostAddress() + ":" + parceiro.getPort());
