@@ -8,34 +8,23 @@ package tp;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.SynchronousQueue;
 
 /**
  *
  * @author vinic
  */
 public class EstadoDaRede {
-int conectados =0;
-int conectei = 0;
+
+    int conectados = 0;
+    int conectei = 0;
     private List<Host> hosts;
     private List<Socket> servidores;
-
-    public List<Tuple<String, Integer>> getServers() {
-        return servers;
-    }
-
-    public void setServers(List<Tuple<String, Integer>> servers) {
-        this.servers = servers;
-    }
+    private List<Tuple<String, Integer>> servers;
+    private CR caro;
     // Queue<Host> filaHosts;
     private Object lock = new Object();
 
     private static EstadoDaRede INSTANCE;
-
-    private CR caro;
-    
-    List<Tuple<String,Integer> > servers;
 
     private EstadoDaRede() {
         servers = new ArrayList<>();
@@ -57,13 +46,10 @@ int conectei = 0;
             return hosts;
         }
     }
-    
-    
 
 //    public Queue<Host> getFilaHosts() {
 //        return filaHosts;
 //    }
-
     public CR getCaro() {
         return caro;
     }
@@ -94,6 +80,12 @@ int conectei = 0;
 
     public void setConectei(int conectei) {
         this.conectei = conectei;
-    }    
-    
+    }
+    public List<Tuple<String, Integer>> getServers() {
+        return servers;
+    }
+
+    public void setServers(List<Tuple<String, Integer>> servers) {
+        this.servers = servers;
+    }
 }

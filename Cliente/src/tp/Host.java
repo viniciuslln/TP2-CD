@@ -42,7 +42,7 @@ public class Host {
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id = id;            
     }
 
     public boolean isRespondeu() {

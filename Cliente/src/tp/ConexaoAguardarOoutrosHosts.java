@@ -8,8 +8,6 @@ package tp;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,15 +15,15 @@ import java.util.logging.Logger;
  *
  * @author vinic
  */
-public class ConexaoMeServidor implements Runnable {
+public class ConexaoAguardarOoutrosHosts implements Runnable {
 
     ServerSocket serv;
 
-    public ConexaoMeServidor(int port) {
+    public ConexaoAguardarOoutrosHosts(int port) {
         try {
             serv = new ServerSocket(port);
         } catch (IOException ex) {
-            Logger.getLogger(ConexaoMeServidor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConexaoAguardarOoutrosHosts.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

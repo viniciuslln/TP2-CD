@@ -20,30 +20,28 @@ import java.util.logging.Logger;
  */
 public class ServidorClienteRunnable implements Runnable {
 
-    private final ServerSocket server;
+    private Socket cliente;
+    private BufferedReader reader;
 
-    public ServidorClienteRunnable() throws IOException {
-        this.server = new ServerSocket(6969);
+    ServidorClienteRunnable(Socket cliente) throws IOException {
+        this.cliente = cliente;
+
+        InputStream in = cliente.getInputStream();
+
+        InputStreamReader iReader = new InputStreamReader(in);
+        reader = new BufferedReader(iReader);
     }
 
     @Override
     public void run() {
         while (true) {
             try {
-                Socket cliente = server.accept();
-                InputStream in = cliente.getInputStream();
-
-                InputStreamReader iReader = new InputStreamReader(in);
-                BufferedReader reader = new BufferedReader(iReader);
 
                 String mensagem;
-                mensagem = reader.readLine();
-                System.out.println(" RECEBIDO: " + mensagem);
-                
-                reader.close();
-                iReader.close();
-                in.close();
-                cliente.close();
+                for (int i = 1; i <= 10; i++) {
+                    mensagem = reader.readLine();
+                    System.out.println(" RECEBIDO: " + mensagem);
+                }
             } catch (Exception ex) {
                 Logger.getLogger(ServidorClienteRunnable.class.getName()).log(Level.SEVERE, null, ex);
             }

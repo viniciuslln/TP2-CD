@@ -6,6 +6,8 @@
 package servidorimpressao;
 
 import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 /**
  *
@@ -18,9 +20,13 @@ public class ServidorImpressao {
      */
     public static void main(String[] args) throws InterruptedException, IOException {
         // TODO code application logic here
-        Thread d = new Thread(new ServidorClienteRunnable());
-        d.start();
-        d.join();        
+        ServerSocket server = new ServerSocket(6969);
+
+        while (true) {
+            Socket cliente = server.accept();
+            Thread d = new Thread(new ServidorClienteRunnable(cliente));
+            d.start();
+        }
     }
 
 }

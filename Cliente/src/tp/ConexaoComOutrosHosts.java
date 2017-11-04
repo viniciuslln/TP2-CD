@@ -6,36 +6,23 @@
 package tp;
 
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author vinic
  */
-public class ConexaoMeCliente implements Runnable {
+public class ConexaoComOutrosHosts implements Runnable {
 
-    List<Tuple<String,Integer> > servers;
     int id;
     int port;
 
-    public ConexaoMeCliente(int id,int port) {
-        servers = new ArrayList<>();
-        servers.add( new Tuple<>("localhost", 7770));
-        servers.add( new Tuple<>("localhost", 7771));
-        servers.add( new Tuple<>("localhost", 7772));
-        servers.add( new Tuple<>("localhost", 7773));
-        servers.add( new Tuple<>("localhost", 7774));
-        servers.add( new Tuple<>("localhost", 7775));
-        servers.add( new Tuple<>("localhost", 7776));
+    public ConexaoComOutrosHosts(int id,int port) {
         this.id = id;
         this.port = port;
     }
 
     @Override
     public void run() {
-        for (Tuple<String, Integer> server : servers) {
-            
+        for (Tuple<String, Integer> server : EstadoDaRede.getINSTANCE().getServers()) {
             String key = server.x;
             Integer value = server.y;
             if(value == port) continue;
@@ -50,7 +37,7 @@ public class ConexaoMeCliente implements Runnable {
                     new Thread(new Servidor(s, id)).start();
                 } catch (Exception e) {
                     //System.out.println("Tentar novamente a: "+ key + ":"+value);
-                    ///Logger.getLogger(ConexaoMeCliente.class.getName()).log(Level.SEVERE, null, e);
+                    ///Logger.getLogger(ConexaoComOutrosHosts.class.getName()).log(Level.SEVERE, null, e);
                 }
             }
         }

@@ -6,10 +6,11 @@
 package tp;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.io.Reader;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,12 +29,13 @@ public class TP2SYNC {
         int port = Integer.parseInt(args[0]);
         int id = Integer.parseInt(args[1]);
         try {
+            pegarIps();
             EstadoDaRede.getINSTANCE().getCaro().setMe(new Host(id));
 
-            new Thread(new ConexaoMeCliente(id, port)).start();
-            new Thread(new ConexaoMeServidor(port)).start();
+            new Thread(new ConexaoComOutrosHosts(id, port)).start();
+            new Thread(new ConexaoAguardarOoutrosHosts(port)).start();
 
-            while (EstadoDaRede.getINSTANCE().getConectados() != 6 && EstadoDaRede.getINSTANCE().getConectei() != 6) {
+            while (EstadoDaRede.getINSTANCE().getConectados() != EstadoDaRede.getINSTANCE().getServers().size()-1 && EstadoDaRede.getINSTANCE().getConectei() != EstadoDaRede.getINSTANCE().getServers().size()-1) {
                 Thread.sleep(1000);
             }
 
@@ -68,12 +70,14 @@ public class TP2SYNC {
         //return true;
     }
 
-    public void pegarIps() {
-        BufferedReader b = new BufferedReader(new InputStreamReader(System.in));
+    public static void pegarIps() throws FileNotFoundException {
+        File f = new File("hosts.txt");
+        BufferedReader b = new BufferedReader(new FileReader(f));
         String m;
         try {
             while ((m = b.readLine()) != null) {
-                String[] t = m.split(":");
+                System.out.println("pegado" + m);
+                String[] t = m.trim().split(":");
                 EstadoDaRede.getINSTANCE().getServers().add(new Tuple<>(t[0], Integer.parseInt(t[1])));
             }
         } catch (IOException ex) {
