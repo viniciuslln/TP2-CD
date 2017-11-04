@@ -20,6 +20,14 @@ int conectados =0;
 int conectei = 0;
     private List<Host> hosts;
     private List<Socket> servidores;
+
+    public List<Tuple<String, Integer>> getServers() {
+        return servers;
+    }
+
+    public void setServers(List<Tuple<String, Integer>> servers) {
+        this.servers = servers;
+    }
     // Queue<Host> filaHosts;
     private Object lock = new Object();
 
@@ -27,8 +35,10 @@ int conectei = 0;
 
     private CR caro;
     
+    List<Tuple<String,Integer> > servers;
 
     private EstadoDaRede() {
+        servers = new ArrayList<>();
         hosts = new ArrayList<>();
         servidores = new ArrayList<>();
         //    filaHosts = new SynchronousQueue<>();
@@ -84,7 +94,6 @@ int conectei = 0;
 
     public void setConectei(int conectei) {
         this.conectei = conectei;
-    }
-    
+    }    
     
 }

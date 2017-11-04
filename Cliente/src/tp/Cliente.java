@@ -61,10 +61,10 @@ public class Cliente implements Runnable {
                     try{
                         // Realisa o parse da string do bufferedreader para int
                         int parseInt = Integer.parseInt(mensagem);
-                        me.id = parseInt;
-                        System.out.println("Conectado ao parceiro: " + me.id);
+                        me.setId(parseInt);
+                        System.out.println("Conectado ao parceiro: " + me.getId());
                         // Envia o id deste nodo para o server
-                        pw.println(EstadoDaRede.getINSTANCE().getCaro().getMe().id);
+                        pw.println(EstadoDaRede.getINSTANCE().getCaro().getMe().getId());
                         continue;
                     }
                     catch( Exception e){
@@ -73,7 +73,7 @@ public class Cliente implements Runnable {
                     
                     // Divide a mensagem recebida
                     // Formato: "mensagem:id:relogio"
-                    System.out.println("Parceiro " + me.id + ": " + mensagem);
+                    //System.out.println("Parceiro " + me.id + ": " + mensagem);
                     String text[] = mensagem.split(":");
 
                     switch (text[0]) {

@@ -47,9 +47,9 @@ public class Servidor implements Runnable {
                     //Recebe id do nodo conectado e o armazena na lista de hosts
                     int parseInt = Integer.parseInt(mensagem);
                     Host h = new Host(server);
-                    h.id = parseInt;
+                    h.setId(parseInt);
                     EstadoDaRede.getINSTANCE().getHosts().add(h);
-                    System.out.println("Conectado ao parceiro: " + h.id);
+                    System.out.println("Conectado ao parceiro: " + h.getId());
                 } catch (Exception e) {
 
                 }

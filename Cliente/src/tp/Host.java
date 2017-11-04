@@ -14,10 +14,11 @@ import java.net.Socket;
  * @author vinic
  */
 public class Host {
-    Socket soc;
-    PrintWriter pw;
-    int id;
-    boolean respondeu = false;
+    private Socket soc;
+    private PrintWriter pw;
+    private int id;
+    private boolean pendente = false;
+    private boolean autorizado = false;
     
     public Host(int id){
         this.id = id;        
@@ -45,11 +46,11 @@ public class Host {
     }
 
     public boolean isRespondeu() {
-        return respondeu;
+        return pendente;
     }
 
     public void setRespondeu(boolean naSC) {
-        this.respondeu = naSC;
+        this.pendente = naSC;
     }
 
     public PrintWriter getPw() {
@@ -59,7 +60,12 @@ public class Host {
     public void setPw(PrintWriter pw) {
         this.pw = pw;
     }
-    
-    
-    
+
+    public boolean isAutorizado() {
+        return autorizado;
+    }
+
+    public void setAutorizado(boolean naSC) {
+        this.autorizado = naSC;
+    }    
 }
