@@ -19,8 +19,12 @@ public class ServidorImpressao {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws InterruptedException, IOException {
+        int porta = 6969;
+        if(args.length > 0){
+            porta = Integer.parseInt(args[0]);
+        }
         // TODO code application logic here
-        ServerSocket server = new ServerSocket(6969);
+        ServerSocket server = new ServerSocket(porta);
 
         while (true) {
             Socket cliente = server.accept();

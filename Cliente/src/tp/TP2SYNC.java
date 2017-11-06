@@ -28,6 +28,9 @@ public class TP2SYNC {
 
         int port = Integer.parseInt(args[0]);
         int id = Integer.parseInt(args[1]);
+        String servidorAddr = args.length > 2 ? args[2] : "localhost";
+        int servidorPorta = args.length > 3 ? Integer.parseInt(args[3]) : 6969;
+        
         try {
             pegarIps();
             EstadoDaRede.getINSTANCE().getCaro().setMe(new Host(id));
@@ -39,7 +42,7 @@ public class TP2SYNC {
                 Thread.sleep(1000);
             }
 
-            Socket impressora = new Socket("localhost", 6969);
+            Socket impressora = new Socket(servidorAddr, servidorPorta);
             PrintWriter pw = (new PrintWriter(impressora.getOutputStream(), true));
             while (true) {
 
